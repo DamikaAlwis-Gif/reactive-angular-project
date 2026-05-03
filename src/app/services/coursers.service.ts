@@ -31,7 +31,10 @@ export class CoursesService {
     return this.http.put<any>(`api/courses/${courseID}`, changes).pipe(
       catchError(err => {
         console.error('Failed to save course', err);
-        return throwError(() => err);
+        return throwError({
+          message: 'Failed to save course',
+          error: err
+        });
       })
     );
   }
